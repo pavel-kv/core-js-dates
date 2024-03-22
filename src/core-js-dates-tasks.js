@@ -126,8 +126,11 @@ function getCountDaysOnPeriod(dateStart, dateEnd) {
  * '2024-02-02', { start: '2024-02-02', end: '2024-03-02' } => true
  * '2024-02-10', { start: '2024-02-02', end: '2024-03-02' } => true
  */
-function isDateInPeriod(/* date, period */) {
-  throw new Error('Not implemented');
+function isDateInPeriod(date, period) {
+  const presetDate = new Date(date);
+  const startDate = new Date(period.start);
+  const endDate = new Date(period.end);
+  return presetDate >= startDate && presetDate <= endDate;
 }
 
 /**
@@ -174,8 +177,14 @@ function formatDate(date) {
  * 12, 2023 => 10
  * 1, 2024 => 8
  */
-function getCountWeekendsInMonth(/* month, year */) {
-  throw new Error('Not implemented');
+function getCountWeekendsInMonth(month, year) {
+  const days = new Date(year, month, 0).getDate();
+  let weekendDays = 0;
+  for (let i = 1; i <= days; i += 1) {
+    const day = new Date(year, month - 1, i).getDay();
+    weekendDays += day === 0 || day === 6 ? 1 : 0;
+  }
+  return weekendDays;
 }
 
 /**
@@ -221,8 +230,18 @@ function getNextFridayThe13th(/* date */) {
  * Date(2024, 5, 1) => 2
  * Date(2024, 10, 10) => 4
  */
-function getQuarter(/* date */) {
-  throw new Error('Not implemented');
+function getQuarter(date) {
+  const month = date.getMonth();
+  let quarter = 1;
+  if (month > 2 && month < 6) {
+    quarter = 2;
+  } else if (month > 5 && month < 9) {
+    quarter = 3;
+  } else if (month > 8 && month < 11) {
+    quarter = 4;
+  }
+
+  return quarter;
 }
 
 /**
