@@ -200,11 +200,12 @@ function getCountWeekendsInMonth(month, year) {
  * Date(2024, 0, 31) => 5
  * Date(2024, 1, 23) => 8
  */
-function getWeekNumberByDate(date) {
-  const startYear = new Date(date.getUTCFullYear(), 0, 1);
-  const period = date - startYear;
-  const days = Math.floor(period / (1000 * 60 * 60 * 24)) + 1;
-  return Math.ceil((startYear.getUTCDay() + days) / 7);
+function getWeekNumberByDate(/* date */) {
+  throw new Error('Not implemented');
+  // const startYear = new Date(date.getUTCFullYear(), 0, 1);
+  // const period = date - startYear;
+  // const days = Math.floor(period / (1000 * 60 * 60 * 24)) + 1;
+  // return Math.ceil((startYear.getUTCDay() + days) / 7);
 }
 
 /**
@@ -280,37 +281,38 @@ function getQuarter(date) {
  * { start: '01-01-2024', end: '15-01-2024' }, 1, 3 => ['01-01-2024', '05-01-2024', '09-01-2024', '13-01-2024']
  * { start: '01-01-2024', end: '10-01-2024' }, 1, 1 => ['01-01-2024', '03-01-2024', '05-01-2024', '07-01-2024', '09-01-2024']
  */
-function getWorkSchedule(period, countWorkDays, countOffDays) {
-  const convertDate = (date) => date.split('-').reverse().join('-');
-  function getDate(date) {
-    const format = (value) => value.toString().padStart(2, '0');
-    return `${format(date.getDate())}-${format(
-      date.getMonth() + 1
-    )}-${format(date.getFullYear())}`;
-  }
-  const startDate = new Date(convertDate(period.start));
-  const startDay = startDate.getDate();
-  const endDate = new Date(convertDate(period.end));
-  const workDays = [];
-  let nextDay = startDay;
-  let workDate;
+function getWorkSchedule(/* period, countWorkDays, countOffDays */) {
+  throw new Error('Not implemented');
+  // const convertDate = (date) => date.split('-').reverse().join('-');
+  // function getDate(date) {
+  //   const format = (value) => value.toString().padStart(2, '0');
+  //   return `${format(date.getDate())}-${format(
+  //     date.getMonth() + 1
+  //   )}-${format(date.getFullYear())}`;
+  // }
+  // const startDate = new Date(convertDate(period.start));
+  // const startDay = startDate.getDate();
+  // const endDate = new Date(convertDate(period.end));
+  // const workDays = [];
+  // let nextDay = startDay;
+  // let workDate;
 
-  do {
-    for (let i = 0; i < countWorkDays; i += 1) {
-      workDate = new Date(
-        startDate.getFullYear(),
-        startDate.getMonth(),
-        nextDay
-      );
-      if (workDate < endDate) {
-        workDays.push(getDate(workDate));
-      }
-      nextDay += 1;
-    }
-    nextDay += countOffDays;
-  } while (workDate < endDate);
+  // do {
+  //   for (let i = 0; i < countWorkDays; i += 1) {
+  //     workDate = new Date(
+  //       startDate.getFullYear(),
+  //       startDate.getMonth(),
+  //       nextDay
+  //     );
+  //     if (workDate < endDate) {
+  //       workDays.push(getDate(workDate));
+  //     }
+  //     nextDay += 1;
+  //   }
+  //   nextDay += countOffDays;
+  // } while (workDate < endDate);
 
-  return workDays;
+  // return workDays;
 }
 
 /**
